@@ -85,12 +85,12 @@
             </geometry>
         </collision>
         <inertial>
-            <mass value="${wheel_mass}" />
-            <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+            <origin xyz="${0.225-(chassis_length/2)} ${0.207-(chassis_breadth/2)} ${0.129-(chassis_height/2)}" rpy="0 0 0" />
+            <mass value="${chassis_mass}" />
             <inertia
-                ixx="${1/12*wheel_mass*(3*(wheel_radius*wheel_radius)+(wheel_length*wheel_length))}"
-                iyy="${1/12*wheel_mass*(3*(wheel_radius*wheel_radius)+(wheel_length*wheel_length))}"
-                izz="${1/2*wheel_mass*(wheel_radius*wheel_radius)}"
+                ixx="0.143"
+                iyy="0.176"
+                izz="0.230"
                 ixy="0.0" iyz="0.0" ixz="0.0" />
         </inertial>
 

@@ -4,6 +4,9 @@
     <!-- Main robot structure -->
     <xacro:include filename="ostem_core.xacro" />
 
+    <!-- Robot kinematics -->
+    <xacro:include filename="ostem_gazebo_kinematics.xacro" />
+
     <!-- Sensors -->
     <gazebo>
         <plugin

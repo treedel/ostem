@@ -1,0 +1,37 @@
+
+
+Bodies (1)
+Area	1.731 m^2
+Density	1060.00 kg / m^3
+Mass	5.132 kg
+Volume	0.005 m^3
+Physical Material	ABS Plastic
+Appearance	ABS (White)
+
+Bounding Box
+	Length 	 0.487 m
+	Width 	 0.41 m
+	Height 	 0.275 m
+Center of Mass	0.225 m, 0.207 m, 0.129 m
+
+Moment of Inertia at Center of Mass   (kg m^2)
+	Ixx = 0.143
+	Ixy = 4.358E-07
+	Ixz = -5.439E-05
+	Iyx = 4.358E-07
+	Iyy = 0.176
+	Iyz = 0.004
+	Izx = -5.439E-05
+	Izy = 0.004
+	Izz = 0.23
+
+Moment of Inertia at Origin   (kg m^2)
+	Ixx = 0.448
+	Ixy = -0.239
+	Ixz = -0.149
+	Iyx = -0.239
+	Iyy = 0.52
+	Iyz = -0.133
+	Izx = -0.149
+	Izy = -0.133
+	Izz = 0.71

@@ -1,66 +1,19 @@
 <?xml version="1.0" ?>
-<!--
-  Try inserting a model:
-
-gz service -s /world/empty/create \
---reqtype gz.msgs.EntityFactory \
---reptype gz.msgs.Boolean \
---timeout 300 \
---req 'sdf: '\
-'"<?xml version=\"1.0\" ?>'\
-'<sdf version=\"1.6\">'\
-'<model name=\"spawned_model\">'\
-'<link name=\"link\">'\
-'<visual name=\"visual\">'\
-'<geometry><sphere><radius>1.0</radius></sphere></geometry>'\
-'</visual>'\
-'<collision name=\"visual\">'\
-'<geometry><sphere><radius>1.0</radius></sphere></geometry>'\
-'</collision>'\
-'</link>'\
-'</model>'\
-'</sdf>" '\
-'pose: {position: {z: 10}} '\
-'name: "new_name" '\
-'allow_renaming: true'
-
-  Then try deleting it:
-
-gz service -s /world/empty/remove \
---reqtype gz.msgs.Entity \
---reptype gz.msgs.Boolean \
---timeout 300 \
---req 'name: "new_name" type: MODEL'
-
-  Try inserting a light:
-
-gz service -s /world/empty/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 300 --req 'sdf: '\
-'"<?xml version=\"1.0\" ?>'\
-'<sdf version=\"1.6\">'\
-'<light name=\"spawned_light\" type=\"directional\">'\
-'<pose>0 0 10 0.1 1.0 0</pose>'\
-'</light>'\
-'</sdf>"'
-
-  Then try deleting it:
-
-gz service -s /world/empty/remove \
---reqtype gz.msgs.Entity \
---reptype gz.msgs.Boolean \
---timeout 300 \
---req 'name: "spawned_light" type: LIGHT'
-
-  Insert a light using a message and allow_renaming:
-
-gz service -s /world/empty/create \
---reqtype gz.msgs.EntityFactory \
---reptype gz.msgs.Boolean \
---timeout 300 \
---req 'allow_renaming: true, light: {name: "spawned_light", type: 2, diffuse: {r: 1}}'
-
--->
 <sdf version="1.6">
   <world name="empty">
+    <spherical_coordinates>
+      <!-- currently gazebo has a bug: instead of outputting lat, long, altitude in ENU
+      (x = East, y = North and z = Up) as the default configurations, it's outputting (-E)(-N)U,
+      therefore we rotate the default frame 180 so that it would go back to ENU
+      see: https://github.com/osrf/gazebo/issues/2022 -->
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>38.161479</latitude_deg>
+      <longitude_deg>-122.454630</longitude_deg>
+      <elevation>488.0</elevation>
+      <heading_deg>-90</heading_deg>
+    </spherical_coordinates>
+    
     <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>

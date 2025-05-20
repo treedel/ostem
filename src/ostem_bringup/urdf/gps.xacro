@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ostem">
+
+    <!-- Constants -->
+    <xacro:property name="gps_pos" value="0 0 0" />
+    <xacro:property name="gps_rpy" value="0 0 0" />
+
+    <!-- Model -->
+    <link name="gps_link" />
+
+    <joint name="gps_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="gps_link" />
+        <origin xyz="${gps_pos}" rpy="${gps_rpy}" />
+    </joint>
+
+    <!-- Plugin -->
+    <gazebo reference="gps_link">
+
+        <sensor name="gps_sensor" type="navsat">
+            <topic>/ostem/gps_raw</topic>
+            <gz_frame_id>gps_link</gz_frame_id>
+            <pose>0 0 0 0 0 0</pose>
+            <update_rate>10.0</update_rate>
+            <always_on>true</always_on>
+            <gps>
+            <position_sensing>
+                <horizontal>
+                <noise type="gaussian">
+                    <mean>0.0</mean>
+                    <stddev>0.000001</stddev>
+                </noise>
+                </horizontal>
+                <vertical>
+                <noise type="gaussian">
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+                </vertical>
+            </position_sensing>
+            </gps>
+        </sensor>
+
+    </gazebo>
+
+</robot>

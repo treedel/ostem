@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ostem">
+
+    <!-- Constants -->
+    <xacro:property name="lidar_pos" value="0 0 ${chassis_height}" />
+    <xacro:property name="lidar_rpy" value="0 0 0" />
+
+    <!-- Model -->
+    <link name="lidar_link" />
+
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="lidar_link" />
+        <origin xyz="${lidar_pos}" rpy="${lidar_rpy}" />
+    </joint>
+
+    <!-- Plugin -->
+
+    <gazebo reference="lidar_link">
+
+        <sensor name="lidar" type="gpu_lidar">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>false</visualize>
+            <update_rate>10</update_rate>
+            <lidar>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-${pi}</min_angle>
+                        <max_angle>${pi}</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </lidar>
+            <topic>/ostem/scan</topic>
+            <gz_frame_id>lidar_link</gz_frame_id>
+        </sensor>
+
+    </gazebo>
+
+</robot>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ostem">
+
+    <!-- Constants -->
+    <xacro:property name="imu_pos" value="0 0 0" />
+    <xacro:property name="imu_rpy" value="0 0 0" />
+
+    <!-- Model -->
+    <link name="imu_link" />
+
+    <joint name="imu_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="imu_link" />
+        <origin xyz="${imu_pos}" rpy="${imu_rpy}" />
+    </joint>
+
+    <!-- Plugin -->
+    <gazebo reference="imu_link">
+
+        <sensor name="imu" type="imu">
+            <always_on>true</always_on>
+            <update_rate>30</update_rate>
+            <visualize>true</visualize>
+            <topic>/ostem/imu_raw</topic>
+            <gz_frame_id>imu_link</gz_frame_id>
+        </sensor>
+
+        <sensor name="magnetometer" type="magnetometer">
+            <topic>/ostem/mag_raw</topic>
+            <gz_frame_id>imu_link</gz_frame_id>
+            <always_on>true</always_on>
+            <update_rate>50.0</update_rate>
+            <visualize>true</visualize>
+            <enable_metrics>true</enable_metrics>
+            <magnetometer>
+            <x>
+                <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00001</stddev>
+                </noise>
+            </x>
+            <y>
+                <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00001</stddev>
+                </noise>
+            </y>
+            <z>
+                <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00001</stddev>
+                </noise>
+            </z>
+            </magnetometer>  
+      </sensor>
+
+    </gazebo>
+
+</robot>

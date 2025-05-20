@@ -144,13 +144,13 @@ def generate_launch_description():
         executable='parameter_bridge',
         parameters=[{'config_file': bridge_param_file}],
         remappings=[
-            ('/sim_robot/odom', '/odom'),
-            ('/sim_robot/tf', '/tf')
+            ('/ostem/odom', '/odom'),
+            ('/ostem/tf', '/tf')
         ],
         output='screen'
     )
 
-    ekf_param_file = os.path.join(package_share, 'config', 'ekf_gz.yaml')
+    package_libbot_localization = FindPackageShare(package='ostem_localization').find('ostem_localization')
     ekf_gazebo_group = GroupAction(
         actions=[
             Node(
@@ -167,27 +167,26 @@ def generate_launch_description():
                 parameters=[{
                     'gain': 0.01,
                     'use_sim_time': use_sim_time,
-                    "use_mag": False,
+                    "use_mag": True,
                     "publish_tf": False,
                     "world_frame": "enu",
                     "fixed_frame": "odom"
                 }],
                 remappings=[
-                    ('/imu/data_raw', '/imu'),
+                    ('/imu/data_raw', '/ostem/imu_raw'),
+                    ('/imu/mag', '/ostem/mag_raw'),
+                    ('/imu/data', '/ostem/imu'),
                 ]
             ),
 
-            
-            Node(
-                package="robot_localization",
-                executable="ekf_node",
-                parameters=[
-                    ekf_param_file,
-                    {'use_sim_time': use_sim_time}
-                ],
-                remappings=[
-                    ('/odometry/filtered', '/odom'),
-                ]
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(package_libbot_localization, 'launch', 'localization.launch.py')
+                ),
+                launch_arguments={
+                    'use_sim_time': use_sim_time,
+                    'run_global_ekf': "false",
+                }.items(),
             )
         ],
         condition=IfCondition(use_ekf_odom)

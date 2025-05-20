@@ -45,7 +45,7 @@ def generate_launch_description():
 
     declare_world_path_rel = DeclareLaunchArgument(
         name='world_path_rel',
-        default_value='empty.sdf',
+        default_value='sonoma_raceway.sdf',
         description='Location of world file for gazebo (relative to "worlds" folder)'
     )
 
@@ -69,7 +69,7 @@ def generate_launch_description():
 
     declare_z = DeclareLaunchArgument(
         name='z',
-        default_value='0.05',
+        default_value='26.0',
         description='z component of initial position, meters'
     )
         

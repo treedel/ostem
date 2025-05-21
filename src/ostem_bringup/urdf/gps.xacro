@@ -20,7 +20,6 @@
         <sensor name="gps_sensor" type="navsat">
             <topic>/ostem/gps_raw</topic>
             <gz_frame_id>gps_link</gz_frame_id>
-            <pose>0 0 0 0 0 0</pose>
             <update_rate>1.0</update_rate>
             <always_on>true</always_on>
             <gps>

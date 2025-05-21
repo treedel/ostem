@@ -16,6 +16,7 @@ def generate_launch_description():
     use_rviz = LaunchConfiguration('use_rviz')
     use_sim_time = LaunchConfiguration('use_sim_time')
     world_path_rel = LaunchConfiguration('world_path_rel')
+    gui_conf_path_rel = LaunchConfiguration('gui_conf_path_rel')
     rviz_config_path = LaunchConfiguration('rviz_config_path')
 
     x = LaunchConfiguration('x')
@@ -49,6 +50,12 @@ def generate_launch_description():
         description='Location of world file for gazebo (relative to "worlds" folder)'
     )
 
+    declare_gui_conf_path_rel = DeclareLaunchArgument(
+        name='gui_conf_path_rel',
+        default_value='gui.config',
+        description='Location of gui config file for gazebo (relative to "worlds" folder)'
+    )
+
     declare_use_sim_time = DeclareLaunchArgument(
         name='use_sim_time',
         default_value='true',
@@ -57,19 +64,19 @@ def generate_launch_description():
 
     declare_x = DeclareLaunchArgument(
         name='x',
-        default_value='0.0',
+        default_value='286.0',
         description='x component of initial position, meters'
     )
 
     declare_y = DeclareLaunchArgument(
         name='y',
-        default_value='0.0',
+        default_value='-148.0',
         description='y component of initial position, meters'
     )
 
     declare_z = DeclareLaunchArgument(
         name='z',
-        default_value='26.0',
+        default_value='2.62',
         description='z component of initial position, meters'
     )
         
@@ -88,7 +95,7 @@ def generate_launch_description():
 
     declare_yaw = DeclareLaunchArgument(
         name='yaw',
-        default_value='0.0',
+        default_value='2.42',
         description='yaw angle of initial orientation, radians'
     )
 
@@ -110,12 +117,13 @@ def generate_launch_description():
     )
 
     world = PathJoinSubstitution([package_share, 'worlds', world_path_rel])
+    config = PathJoinSubstitution([package_share, 'worlds', gui_conf_path_rel])
     package_ros_gz_sim = FindPackageShare(package='ros_gz_sim').find('ros_gz_sim')
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(package_ros_gz_sim, 'launch', 'gz_sim.launch.py')),
             launch_arguments={
-                'gz_args': ['-r ', world],
+                'gz_args': ['-r ', world, ' --gui-config ', config],
                 'on_exit_shutdown': 'true',
                 'use_sim_time': use_sim_time
         }.items()
@@ -200,6 +208,7 @@ def generate_launch_description():
     ld.add_action(declare_use_sim_time)
     ld.add_action(declare_use_sim_time)
     ld.add_action(declare_world_path_rel)
+    ld.add_action(declare_gui_conf_path_rel)
 
     ld.add_action(declare_x)
     ld.add_action(declare_y)

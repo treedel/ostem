@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <world name="empty">
+
     <spherical_coordinates>
       <!-- currently gazebo has a bug: instead of outputting lat, long, altitude in ENU
       (x = East, y = North and z = Up) as the default configurations, it's outputting (-E)(-N)U,

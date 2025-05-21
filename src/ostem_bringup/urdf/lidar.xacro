@@ -2,11 +2,37 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ostem">
 
     <!-- Constants -->
-    <xacro:property name="lidar_pos" value="0 0 ${chassis_height}" />
+    <xacro:property name="lidar_pos" value="0 0 0.225" />
     <xacro:property name="lidar_rpy" value="0 0 0" />
+    <xacro:property name="lidar_radius" value="0.04" />
+    <xacro:property name="lidar_thickness" value="0.03885" />
+    <xacro:property name="lidar_mass" value="0.20" />
 
     <!-- Model -->
-    <link name="lidar_link" />
+    <link name="lidar_link">
+
+        <visual>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_thickness}" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_thickness}" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <mass value="${lidar_mass}" />
+            <inertia
+                ixx="${1/12*lidar_mass*(3*(lidar_radius*lidar_radius)+(lidar_thickness*lidar_thickness))}"
+                iyy="${1/12*lidar_mass*(3*(lidar_radius*lidar_radius)+(lidar_thickness*lidar_thickness))}"
+                izz="${1/2*lidar_mass*(lidar_radius*lidar_radius)}"
+                ixy="0.0" iyz="0.0" ixz="0.0" />
+        </inertial>
+
+    </link>
 
     <joint name="lidar_joint" type="fixed">
         <parent link="base_link" />

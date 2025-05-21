@@ -21,23 +21,23 @@
             <topic>/ostem/gps_raw</topic>
             <gz_frame_id>gps_link</gz_frame_id>
             <pose>0 0 0 0 0 0</pose>
-            <update_rate>10.0</update_rate>
+            <update_rate>1.0</update_rate>
             <always_on>true</always_on>
             <gps>
-            <position_sensing>
+                <position_sensing>
                 <horizontal>
-                <noise type="gaussian">
+                    <noise type="gaussian">
                     <mean>0.0</mean>
-                    <stddev>0.000001</stddev>
-                </noise>
+                    <stddev>0.0</stddev>
+                    </noise>
                 </horizontal>
                 <vertical>
-                <noise type="gaussian">
+                    <noise type="gaussian">
                     <mean>0.0</mean>
-                    <stddev>0.01</stddev>
-                </noise>
+                    <stddev>0.0</stddev>
+                    </noise>
                 </vertical>
-            </position_sensing>
+                </position_sensing>
             </gps>
         </sensor>
 

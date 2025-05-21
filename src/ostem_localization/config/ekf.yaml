@@ -1,5 +1,3 @@
-# For parameter descriptions, please refer to the template parameter files for each node.
-
 ekf_filter_node_odom:
   ros__parameters:
     frequency: 30.0
@@ -13,23 +11,23 @@ ekf_filter_node_odom:
     world_frame: odom
 
     odom0: /ostem/steering_odom
-    odom0_config: [false, false, false,
+    odom0_config: [true, true, false,
                   false, false, false,
-                  true,  true,  false,
-                  false, false, false,
+                  true,  false,  false,
+                  false, false, true,
                   false, false, false]
     odom0_queue_size: 10
     odom0_differential: false
     odom0_relative: false
 
     imu0: /ostem/imu
-    imu0_config: [true, true, false,
+    imu0_config: [false, false, false,
                   false,  false,  false,
                   false, false, false,
                   true,  true,  true,
-                  true,  true,  false]
+                  true,  true,  true]
     imu0_differential: true  # If using a real robot you might want to set this to true, since usually absolute measurements from real imu's are not very accurate
-    imu0_relative: true
+    imu0_relative: false
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
@@ -46,14 +44,14 @@ ekf_filter_node_map:
     world_frame: map
 
     odom0: /ostem/steering_odom
-    odom0_config: [false, false, false,
+    odom0_config: [true, true, false,
                   false, false, false,
-                  true,  true,  false,
-                  false, false, false,
+                  true,  false,  false,
+                  false, false, true,
                   false, false, false]
     odom0_queue_size: 10
     odom0_differential: true
-    odom0_relative: true
+    odom0_relative: false
 
     odom1: /ostem/odom/gps
     odom1_config: [true,  true,  false,
@@ -62,28 +60,28 @@ ekf_filter_node_map:
                   false, false, false,
                   false, false, false]
     odom1_queue_size: 10
-    odom1_differential: true
-    odom1_relative: true
+    odom1_differential: false
+    odom1_relative: false
 
     imu0: /ostem/imu
     imu0_config: [false, false, false,
                   false,  false,  false,
                   false, false, false,
-                  false,  false,  true,
-                  false,  false,  false]
-    imu0_differential: false  # If using a real robot you might want to set this to true, since usually absolute measurements from real imu's are not very accurate
+                  true,  true,  true,
+                  true,  true,  true]
+    imu0_differential: true  # If using a real robot you might want to set this to true, since usually absolute measurements from real imu's are not very accurate
     imu0_relative: false
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
 navsat_transform:
   ros__parameters:
-    frequency: 30.0
+    frequency: 1.0
     delay: 3.0
     magnetic_declination_radians: 0.0
     yaw_offset: 0.0
     zero_altitude: true
     broadcast_cartesian_transform: true
     publish_filtered_gps: true
-    use_odometry_yaw: false
+    use_odometry_yaw: true
     wait_for_datum: false

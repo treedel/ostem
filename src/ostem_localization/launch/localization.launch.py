@@ -48,7 +48,7 @@ def generate_launch_description():
         ]
     )
 
-    ekf_localization_map = Node(\
+    ekf_localization_map = Node(
         condition=IfCondition(run_global_ekf),
         package="robot_localization",
         executable="ekf_node",
@@ -73,7 +73,7 @@ def generate_launch_description():
         ],
         remappings=[
             ('/imu', '/ostem/imu'),
-            ('/odometry/filtered', '/ostem/odom/local'),
+            ('/odometry/filtered', '/ostem/odom/global'),
             ('/gps/fix', '/ostem/gps_raw'),
             ('/odometry/gps', '/ostem/odom/gps'),
             ('/gps/filtered', '/ostem/gps'),

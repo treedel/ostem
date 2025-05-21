@@ -64,19 +64,19 @@ def generate_launch_description():
 
     declare_x = DeclareLaunchArgument(
         name='x',
-        default_value='286.0',
+        default_value='2.0',
         description='x component of initial position, meters'
     )
 
     declare_y = DeclareLaunchArgument(
         name='y',
-        default_value='-148.0',
+        default_value='-2.5',
         description='y component of initial position, meters'
     )
 
     declare_z = DeclareLaunchArgument(
         name='z',
-        default_value='2.62',
+        default_value='0.40',
         description='z component of initial position, meters'
     )
         
@@ -95,7 +95,7 @@ def generate_launch_description():
 
     declare_yaw = DeclareLaunchArgument(
         name='yaw',
-        default_value='2.42',
+        default_value='0.0',
         description='yaw angle of initial orientation, radians'
     )
 
@@ -193,7 +193,7 @@ def generate_launch_description():
                 ),
                 launch_arguments={
                     'use_sim_time': use_sim_time,
-                    'run_global_ekf': "false",
+                    'run_global_ekf': "true",
                 }.items(),
             )
         ],

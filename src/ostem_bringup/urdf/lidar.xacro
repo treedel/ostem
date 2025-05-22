@@ -41,7 +41,6 @@
     </joint>
 
     <!-- Plugin -->
-
     <gazebo reference="lidar_link">
 
         <sensor name="lidar" type="gpu_lidar">
@@ -58,7 +57,7 @@
                 </scan>
                 <range>
                     <min>0.3</min>
-                    <max>12</max>
+                    <max>18.0</max>
                 </range>
             </lidar>
             <topic>/ostem/scan</topic>

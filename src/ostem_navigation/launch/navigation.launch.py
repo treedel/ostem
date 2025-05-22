@@ -14,6 +14,7 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time')
     nav_config_path = LaunchConfiguration('nav_config_path')
+    use_mapviz = LaunchConfiguration('use_mapviz')
     use_rviz = LaunchConfiguration('use_rviz')
     rviz_config_path = LaunchConfiguration('rviz_config_path')
 
@@ -27,6 +28,12 @@ def generate_launch_description():
         name='nav_config_path',
         default_value=os.path.join(package_share, 'config', 'navigation.yaml'),
         description='Location of "navigation.yaml" file for navigation parameters'
+    )
+
+    declare_use_mapviz = DeclareLaunchArgument(
+        name='use_mapviz',
+        default_value='true',
+        description='Whether to start mapviz'
     )
 
     declare_use_rviz = DeclareLaunchArgument(
@@ -51,6 +58,14 @@ def generate_launch_description():
         }.items()
     )
 
+    ostem_localization_package_share = FindPackageShare(package='ostem_localization').find('ostem_localization')
+    mapviz = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(ostem_localization_package_share, 'launch', 'mapviz.launch.py')
+        ),
+        condition=IfCondition(use_mapviz),
+    )
+
     interactive_waypoint_follower = Node(
         package=package_name,
         executable='interactive_waypoint_follower',
@@ -70,10 +85,12 @@ def generate_launch_description():
 
     ld.add_action(declare_use_sim_time)
     ld.add_action(declare_nav_config_path)
+    ld.add_action(declare_use_mapviz)
     ld.add_action(declare_use_rviz)
     ld.add_action(declare_rviz_config_path)
 
     ld.add_action(navigation)
+    ld.add_action(mapviz)
     ld.add_action(interactive_waypoint_follower)
     ld.add_action(rviz)
 

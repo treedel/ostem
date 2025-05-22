@@ -9,7 +9,7 @@ show_status_bar: true
 show_capture_tools: true
 window_width: 1920
 window_height: 955
-view_scale: 0.926585853
+view_scale: 0.340613902
 offset_x: 0
 offset_y: 0
 use_latest_transforms: true
@@ -31,7 +31,7 @@ displays:
           name: OSM
           type: wmts
       bing_api_key: ""
-      source: OSM
+      source: Maptiler
   - type: mapviz_plugins/point_click_publisher
     name: new display
     config:
